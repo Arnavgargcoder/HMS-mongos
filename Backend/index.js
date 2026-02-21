@@ -261,7 +261,7 @@ app.get('/api/allcustomers', async (req, res) => {
         res.status(500).json({ error: 'Database error' });
     }
 });
-
+app.get('/', (req, res) => res.send("Server is running correctly ✅"));
 /* ---------------------- CHECKIN ROUTES ---------------------- */
 app.post('/checkin-customer', async (req, res) => {
   try {
