@@ -1,0 +1,55 @@
+.room-container,
+.driver-details-container,
+.customer-details-container,
+.employee-details-container {
+  max-width: 900px;
+  margin: 30px auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-size: 34px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.room-table,
+.driver-table,
+.customer-table,
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 25px;
+}
+
+.room-table th,
+.room-table td,
+.driver-table th,
+.driver-table td,
+.customer-table th,
+.customer-table td,
+.employee-table th,
+.employee-table td {
+  border: 1px solid #ccc;
+  padding: 12px;
+}
+
+.room-table th,
+.driver-table th,
+.customer-table th,
+.employee-table th {
+  background-color: #f9f9f9;
+  font-weight: bold;
+}
+
+.back-button {
+  background-color: #ff6a00;
+  color: white;
+  padding: 12px 40px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  font-weight: bold;
+}

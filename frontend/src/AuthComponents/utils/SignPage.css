@@ -1,0 +1,141 @@
+.signup-container {
+  height: 100vh;
+  width: 100%;
+  background-image: url('/public/images/loginsignup.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.signup-logo-container {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+
+.signup-logo-img {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #fff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+.signup-form-wrapper {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  max-width: 900px;
+}
+
+.signup-form-box {
+  width: 100%;
+  max-width: 400px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 2rem;
+  color: #000;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.signup-form-group {
+  margin-bottom: 1rem;
+}
+
+.signup-form-group input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 4px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.signup-invalid-feedback {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+.signup-radio-group {
+  display: flex;
+  gap: 20px;
+  margin-top: 5px;
+}
+
+.signup-radio-inline {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.signup-button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  gap: 10px;
+}
+
+.signup-submit-btn,
+.signup-reset-btn,
+.signup-cancel-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  width: 110px;
+}
+
+.signup-submit-btn {
+  background-color: #4caf50;
+}
+
+.signup-reset-btn {
+  background-color: #2196f3;
+}
+
+.signup-cancel-btn {
+  background-color: #f44336;
+}
+
+.signup-photo-preview {
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.signup-photo-img {
+  max-width: 150px;
+  max-height: 150px;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 2px solid #fff;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .signup-form-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .signup-photo-preview {
+    margin-top: 20px;
+  }
+}

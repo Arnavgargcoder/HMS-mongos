@@ -1,0 +1,111 @@
+/* Fullscreen background with gradient overlay */
+.login-container {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+    url('/public/images/loginsignup.jpg') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Frosted glass card */
+.login-form {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+}
+
+/* Logo in top-right corner */
+.logo-container {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  z-index: 10;
+}
+
+.logo-img {
+  width: 140px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid #fff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+}
+
+/* Form elements */
+.login-form h2 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 18px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.login-form input::placeholder {
+  color: #777;
+}
+
+.login-form input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px #90c4ff;
+}
+
+/* Full-width, centered login button with animation */
+.login-form button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #0077ff, #00bfff);
+  color: white;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, background-color 0.3s;
+}
+
+.login-form button:hover {
+  transform: scale(1.03);
+  background: linear-gradient(135deg, #005eea, #00a4cc);
+}
+
+/* Error text */
+.error {
+  color: #ffc107;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 500px) {
+  .login-form {
+    margin: 0 1rem;
+    padding: 2rem 1.5rem;
+  }
+
+  .logo-img {
+    width: 120px;
+    height: 80px;
+  }
+}

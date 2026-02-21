@@ -1,0 +1,129 @@
+.cleaning-banner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 80vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('/public/images/roomcleaning.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: flex-start; /* Start from left */
+  align-items: flex-start; /* Start from top */
+  padding: 40px 20px; /* Add spacing from top and left */
+  gap: 20px;
+  color: white;
+  box-sizing: border-box;
+}
+
+/* === CheckIn Form Container === */
+.cleaning-form {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  border-radius: 10px;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+/* === Title === */
+.cleaning-title {
+  width: 100%;
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 4px;
+  font-weight: bold;
+  color: white;
+}
+
+/* === Form Group === */
+.cleaning-group {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2px;
+  gap: 5px;
+}
+
+.cleaning-group.full-width {
+  width: 100%;
+}
+
+.cleaning-group label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  min-width: 100%;
+  display: inline-block;
+  margin-bottom: 5px;
+  margin-top: 8px;
+  text-align: left;
+}
+
+.cleaning-group input,
+.cleaning-group select {
+  width: 400px;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* === Form Buttons === */
+.cleaning-buttons {
+  width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  margin-top: 10px;
+}
+
+.cleaning-submit,
+.cleaning-cancel {
+  flex: 1;
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+}
+
+.cleaning-submit {
+  background-color: #2196f3;
+}
+
+.cleaning-cancel {
+  background-color: #f44336;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .cleaning-group {
+    width: 100%;
+  }
+
+  .cleaning-buttons {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .cleaning-submit,
+  .cleaning-cancel {
+    width: 100%;
+  }
+
+  .cleaning-gender-options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

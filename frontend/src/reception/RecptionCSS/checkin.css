@@ -1,0 +1,169 @@
+.checkin-banner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 80vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('/public/images/check-in-out.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: flex-start; /* Start from left */
+  align-items: flex-start; /* Start from top */
+  padding: 40px 20px; /* Add spacing from top and left */
+  gap: 20px;
+  color: white;
+  box-sizing: border-box;
+}
+
+/* === CheckIn Form Container === */
+.checkin-form {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  border-radius: 10px;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+/* === Title === */
+.checkin-title {
+  width: 100%;
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 4px;
+  font-weight: bold;
+  color: white;
+}
+
+/* === Form Group === */
+.checkin-group {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2px;
+  gap: 5px;
+}
+
+.checkin-group.full-width {
+  width: 100%;
+}
+
+.checkin-group label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  min-width: 100%;
+  display: inline-block;
+  margin-bottom: 5px;
+  margin-top: 8px;
+  text-align: left;
+}
+
+.checkin-group input,
+.checkin-group select {
+  width: 280px;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* === Gender Options === */
+.checkin-gender-options {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.checkin-gender-options label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.checkin-gender-options input[type='radio'] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #2196f3;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.checkin-gender-options input[type='radio']:checked::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: #2196f3;
+}
+
+/* === Form Buttons === */
+.checkin-buttons {
+  width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  margin-top: 10px;
+}
+
+.checkin-submit,
+.checkin-cancel {
+  flex: 1;
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+}
+
+.checkin-submit {
+  background-color: #2196f3;
+}
+
+.checkin-cancel {
+  background-color: #f44336;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .checkin-group {
+    width: 100%;
+  }
+
+  .checkin-buttons {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .checkin-submit,
+  .checkin-cancel {
+    width: 100%;
+  }
+
+  .checkin-gender-options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

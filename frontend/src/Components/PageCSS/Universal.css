@@ -1,0 +1,218 @@
+/* ==== Common Form Container Base === */
+.main-banner-room-banner {
+  width: 100%;
+  max-width: 1200px;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('/public/images/room.jpg');
+  margin: 0 auto;
+  min-height: 80vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px 0;
+  gap: 20px;
+  color: white;
+  box-sizing: border-box;
+}
+.main-banner-driver-banner {
+  width: 100%;
+  max-width: 1200px;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('/public/images/driver.webp');
+  margin: 0 auto;
+  min-height: 80vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px 0;
+  gap: 20px;
+  color: white;
+  box-sizing: border-box;
+}
+.main-banner-employee-banner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('/public/images/employee.avif');
+  min-height: 80vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px 0;
+  gap: 20px;
+  color: white;
+  box-sizing: border-box;
+}
+
+/* === Form Wrapper === */
+form {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  border-radius: 10px;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+/* === Title === */
+.form-title {
+  width: 100%;
+  text-align: center;
+  font-size: 1.4rem;
+  margin-bottom: 4px;
+  font-weight: bold;
+  color: white;
+}
+
+/* === Form Group === */
+.form-group {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+input,
+select {
+  padding: 5px 8px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  height: 45px;
+}
+
+/* === Gender / Type Options === */
+.gender-options {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.gender-options label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.gender-options input[type='radio'] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #2196f3;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.gender-options input[type='radio']:checked::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: #2196f3;
+}
+
+/* === Add Buttons for Dynamic Rows === */
+.add-job-row,
+.add-car-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.add-job-btn,
+.add-car-btn {
+  padding: 5px 8px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* === Submit/Cancel Buttons === */
+.form-buttons {
+  width: 90%;
+  height: 45px;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin-top: 4px;
+}
+
+.submit-btn,
+.cancel-btn {
+  flex: 1;
+  padding: 8px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.submit-btn {
+  background-color: #2196f3;
+  color: white;
+}
+
+.cancel-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .form-group {
+    width: 100%;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .submit-btn,
+  .cancel-btn {
+    width: 100%;
+  }
+
+  .gender-options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
