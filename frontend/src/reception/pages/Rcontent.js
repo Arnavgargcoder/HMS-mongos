@@ -22,7 +22,7 @@ function Rcontent() {
     }
 
     axios
-      .get(`http://localhost:3001/manager/${uid}`)
+      .get(`${process.env.REACT_APP_API_URL}/manager/${uid}`)
       .then((res) => {
         setManager(res.data);
         setLoading(false);

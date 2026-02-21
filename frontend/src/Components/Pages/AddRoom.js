@@ -21,7 +21,7 @@ function AddRoom() {
     };
 
     try {
-      const response = await fetch('http://localhost:3001/add-room', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/add-room`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(roomData),

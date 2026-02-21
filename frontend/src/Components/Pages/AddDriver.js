@@ -47,7 +47,7 @@ function AddDriver() {
 
     try {
       const res = await axios.post(
-        'http://localhost:3001/add-driver',
+        `${process.env.REACT_APP_API_URL}/add-driver`,
         driverData
       );
       if (res.data?.message === 'Driver added successfully') {

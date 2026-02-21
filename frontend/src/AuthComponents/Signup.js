@@ -76,7 +76,7 @@ function SignUp() {
       data.append('pwd', formData.pwd);
       data.append('photo', formData.photo);
 
-      const res = await axios.post('http://localhost:3001/signup', data);
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/signup`, data);
       alert(res.data.message);
       navigate('/login');
     } catch (error) {

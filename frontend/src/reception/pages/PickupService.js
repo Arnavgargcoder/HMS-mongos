@@ -20,7 +20,7 @@ function PickupService() {
   // Fetch customer list on mount
   useEffect(() => {
     axios
-      .get('http://localhost:3001/api/pickup-customers')
+      .get(`${process.env.REACT_APP_API_URL}/api/pickup-customers`)
       .then((res) => setCustomers(res.data))
       .catch((err) => console.error('Error loading customers:', err));
   }, []);
@@ -29,7 +29,7 @@ function PickupService() {
   useEffect(() => {
     const fetchDrivers = () => {
       axios
-        .get('http://localhost:3001/api/pickup-drivers')
+        .get(`${process.env.REACT_APP_API_URL}/api/pickup-drivers`)
         .then((res) => {
           const available = res.data;
           setDrivers(available);
@@ -82,7 +82,7 @@ function PickupService() {
     const cumid = `${selectedCustomer.identityNumber}-${selectedCustomer.name}`;
 
     try {
-      await axios.post('http://localhost:3001/api/assign-driver', {
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/assign-driver`, {
         driverName: driver,
         cumid,
       });

@@ -12,7 +12,7 @@ function RoomCleaning() {
   // Fetch all dirty + occupied rooms with full details
   useEffect(() => {
     axios
-      .get('http://localhost:3001/dirty-room')
+      .get(`${process.env.REACT_APP_API_URL}/dirty-room`)
       .then((res) => {
         setRoomOptions(res.data);
       })
@@ -47,13 +47,13 @@ function RoomCleaning() {
       };
 
       const response = await axios.post(
-        'http://localhost:3001/room-cleaning',
+        `${process.env.REACT_APP_API_URL}/room-cleaning`,
         payload
       );
       alert(response.data.message || 'Room updated successfully');
 
       // Refresh dropdown list after update
-      const updated = await axios.get('http://localhost:3001/dirty-room');
+      const updated = await axios.get(`${process.env.REACT_APP_API_URL}/dirty-room`);
       setRoomOptions(updated.data);
 
       handleReset();

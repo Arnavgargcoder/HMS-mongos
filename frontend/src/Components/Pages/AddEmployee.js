@@ -38,7 +38,7 @@ function AddEmployee() {
     const employeeData = { name, age, gender, job, salary };
     try {
       const response = await axios.post(
-        'http://localhost:3001/add-employee',
+        `${process.env.REACT_APP_API_URL}/add-employee`,
         employeeData
       );
       if (response.data.success) {

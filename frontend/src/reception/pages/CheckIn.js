@@ -26,7 +26,7 @@ function CheckIn() {
     if (bedType) {
       axios
         .get(
-          `http://localhost:3001/checkin-rooms/${encodeURIComponent(bedType)}`
+          `${process.env.REACT_APP_API_URL}/checkin-rooms/${encodeURIComponent(bedType)}`
         )
         .then((res) => {
           setRoomOptions(res.data);
@@ -56,7 +56,7 @@ function CheckIn() {
       };
 
       const response = await axios.post(
-        'http://localhost:3001/checkin-customer',
+        `${process.env.REACT_APP_API_URL}/checkin-customer`,
         payload
       );
       alert(response.data.message || 'Check-in successful');

@@ -32,7 +32,7 @@ function Checkout() {
   const fetchCustomers = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:3001/api/identity-numbers'
+        `${process.env.REACT_APP_API_URL}/api/identity-numbers`
       );
       setCustomers(response.data || []);
     } catch (error) {
@@ -45,12 +45,12 @@ function Checkout() {
     if (!identityNumber) return;
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/customer-detail/${identityNumber}`
+        `${process.env.REACT_APP_API_URL}/api/customer-detail/${identityNumber}`
       );
       const customer = response.data;
 
       const priceRes = await axios.get(
-        `http://localhost:3001/api/room-price/${customer.roomnumber}`
+        `${process.env.REACT_APP_API_URL}/api/room-price/${customer.roomnumber}`
       );
       const roomPrice = priceRes.data.price || 0;
 
@@ -90,7 +90,7 @@ function Checkout() {
       const identity_key = `${selectedCustomerId}-${formData.guest_name}`;
       // console.log(identity_key, typeof identity_key);
       // console.log(selectedCustomerId, typeof selectedCustomerId);
-      await axios.post('http://localhost:3001/api/checkout-customers', {
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/checkout-customers`, {
         room_number: parseInt(formData.room_number, 10),
         customer: selectedCustomerId, // use the stored variable
         identity_key,

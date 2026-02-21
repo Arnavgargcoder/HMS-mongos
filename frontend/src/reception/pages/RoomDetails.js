@@ -11,7 +11,7 @@ function RoomDetails() {
   // Function to fetch data
   const fetchRooms = () => {
     axios
-      .get('http://localhost:3001/api/allrooms')
+      .get(`${process.env.REACT_APP_API_URL}/api/allrooms`)
       .then((res) => setRooms(res.data))
       .catch((err) => console.error('Error fetching room details:', err));
   };

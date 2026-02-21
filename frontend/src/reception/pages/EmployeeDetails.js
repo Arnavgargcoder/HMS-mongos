@@ -10,7 +10,7 @@ function EmployeeDetails() {
   const fetchEmployees = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:3001/api/allemployees'
+        `${process.env.REACT_APP_API_URL}/api/allemployees`
       );
       setEmployees(response.data);
     } catch (error) {
