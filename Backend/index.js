@@ -12,7 +12,9 @@ app.use(cors());
 app.use(express.json());
 
 /* ---------------------- DB CONNECTION ---------------------- */
-mongoose.connect(process.env.MONGO_URI).then(() => console.log('Connected to MongoDB'))
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
 /* ---------------------- Mongoose Models ---------------------- */
@@ -92,7 +94,11 @@ app.post('/signup', upload.single('photo'), async (req, res) => {
     const hashedPassword = await bcrypt.hash(pwd, 10);
 
     const matchManager = new Manager({
-      uid, name, gender, photo: photoBuffer, pwd: hashedPassword
+      uid,
+      name,
+      gender,
+      photo: photoBuffer,
+      pwd: hashedPassword,
     });
     await matchManager.save();
 
@@ -111,8 +117,7 @@ app.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'UID and password are required' });
 
     const user = await Manager.findOne({ uid });
-    if (!user)
-      return res.status(401).json({ message: 'Invalid credentials' });
+    if (!user) return res.status(401).json({ message: 'Invalid credentials' });
 
     const isMatch = await bcrypt.compare(pwd, user.pwd);
     if (!isMatch)
@@ -138,29 +143,28 @@ app.get('/manager/:uid', async (req, res) => {
     const { uid } = req.params;
     const manager = await Manager.findOne({ uid });
 
-    if (!manager)
-      return res.status(404).json({ message: 'Manager not found' });
+    if (!manager) return res.status(404).json({ message: 'Manager not found' });
 
     let photoData = null;
     if (manager.photo) {
-        try {
-            const buffer = await sharp(manager.photo)
-            .resize({ width: 300, height: 300, fit: 'contain' })
-            .jpeg({ quality: 95 })
-            .toBuffer();
-            photoData = `data:image/jpeg;base64,${buffer.toString('base64')}`;
-        } catch(err) {
-            console.error('Image error:', err);
-        }
+      try {
+        const buffer = await sharp(manager.photo)
+          .resize({ width: 300, height: 300, fit: 'contain' })
+          .jpeg({ quality: 95 })
+          .toBuffer();
+        photoData = `data:image/jpeg;base64,${buffer.toString('base64')}`;
+      } catch (err) {
+        console.error('Image error:', err);
+      }
     }
 
     res.json({
       uid: manager.uid,
       name: manager.name,
       gender: manager.gender,
-      photo: photoData
+      photo: photoData,
     });
-  } catch(err) {
+  } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error' });
   }
@@ -169,14 +173,23 @@ app.get('/manager/:uid', async (req, res) => {
 /* ---------------------- DRIVER ROUTES ---------------------- */
 app.post('/add-driver', async (req, res) => {
   try {
-    const { name, age, gender, carModel, carNumber, availability, cumid } = req.body;
+    const { name, age, gender, carModel, carNumber, availability, cumid } =
+      req.body;
 
     if (!name || !age || !gender || !carModel || !carNumber || !availability) {
-      return res.status(400).json({ message: 'All fields except cumid are required' });
+      return res
+        .status(400)
+        .json({ message: 'All fields except cumid are required' });
     }
 
     const driver = new Driver({
-      name, age, gender, carmodel: carModel, carnumber: carNumber, availability, cumid: cumid ?? null
+      name,
+      age,
+      gender,
+      carmodel: carModel,
+      carnumber: carNumber,
+      availability,
+      cumid: cumid ?? null,
     });
     await driver.save();
 
@@ -197,7 +210,7 @@ app.post('/add-room', async (req, res) => {
       bedtype: bedType,
       roomcondition: condition,
       availability,
-      price
+      price,
     });
     await room.save();
 
@@ -215,9 +228,9 @@ app.post('/add-employee', async (req, res) => {
     const employee = new Employee({ name, age, gender, job, salary });
     const result = await employee.save();
     res.json({ success: true, id: result._id });
-  } catch(err) {
-      console.error(err);
-      res.status(500).json({ error: 'Insert error' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Insert error' });
   }
 });
 
@@ -243,25 +256,25 @@ app.get('/api/allrooms', async (req, res) => {
 });
 
 app.get('/api/allemployees', async (req, res) => {
-    try {
-        const employees = await Employee.find({});
-        res.json(employees);
-    } catch(err) {
-        console.error(err);
-        res.status(500).json({ error: 'Database error' });
-    }
+  try {
+    const employees = await Employee.find({});
+    res.json(employees);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Database error' });
+  }
 });
 
 app.get('/api/allcustomers', async (req, res) => {
-    try {
-        const customers = await Customer.find({});
-        res.json(customers);
-    } catch(err) {
-        console.error(err);
-        res.status(500).json({ error: 'Database error' });
-    }
+  try {
+    const customers = await Customer.find({});
+    res.json(customers);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Database error' });
+  }
 });
-app.get('/', (req, res) => res.send("Server is running correctly ✅"));
+app.get('/', (req, res) => res.send('Server is running correctly ✅'));
 /* ---------------------- CHECKIN ROUTES ---------------------- */
 app.post('/checkin-customer', async (req, res) => {
   try {
@@ -277,56 +290,72 @@ app.post('/checkin-customer', async (req, res) => {
     } = req.body;
 
     const customer = new Customer({
-        identityType, identityNumber, name, gender, checkInTime, bedtype: bedType, roomnumber: roomNumber, amount
+      identityType,
+      identityNumber,
+      name,
+      gender,
+      checkInTime,
+      bedtype: bedType,
+      roomnumber: roomNumber,
+      amount,
     });
     await customer.save();
 
-    await Room.updateOne({ roomnumber: roomNumber }, { availability: "Occupied" });
+    await Room.updateOne(
+      { roomnumber: roomNumber },
+      { availability: 'Occupied' }
+    );
 
     res.json({ message: 'Check-in successful' });
-  } catch(err) {
-      console.error(err);
-      res.status(500).json({ message: 'Insert failed' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Insert failed' });
   }
 });
 
 app.get('/checkin-rooms/:bedType', async (req, res) => {
   try {
     const { bedType } = req.params;
-    const rooms = await Room.find({ bedtype: bedType, availability: "Available" });
+    const rooms = await Room.find({
+      bedtype: bedType,
+      availability: 'Available',
+    });
     res.json(rooms.map((r) => r.roomnumber));
-  } catch(err) {
-      console.error(err);
-      res.status(500).json({ error: 'Database error' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Database error' });
   }
 });
 
 /* ---------------------- CHECKOUT ROUTES ---------------------- */
 app.get('/api/identity-numbers', async (req, res) => {
   try {
-      const customers = await Customer.find({}, 'identityNumber');
-      res.json(customers);
-  } catch(err) {
-      console.error(err);
-      res.status(500).json({ error: err });
+    const customers = await Customer.find({}, 'identityNumber');
+    res.json(customers);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err });
   }
 });
 
 app.get('/api/customer-detail/:id', async (req, res) => {
   try {
     const id = req.params.id;
-    const customer = await Customer.findOne({ identityNumber: id }, 'name roomnumber checkInTime amount');
+    const customer = await Customer.findOne(
+      { identityNumber: id },
+      'name roomnumber checkInTime amount'
+    );
 
     if (!customer) return res.status(404).json({ error: 'Customer not found' });
 
     res.json({
-        name: customer.name,
-        roomnumber: customer.roomnumber,
-        checkInTime: customer.checkInTime,
-        amount: customer.amount
+      name: customer.name,
+      roomnumber: customer.roomnumber,
+      checkInTime: customer.checkInTime,
+      amount: customer.amount,
     });
-  } catch(err) {
-      res.status(500).json({ error: err.message });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -335,13 +364,13 @@ app.get('/api/room-price/:roomNumber', async (req, res) => {
     const { roomNumber } = req.params;
     const room = await Room.findOne({ roomnumber: roomNumber });
     if (room) {
-        res.send({ price: room.price });
+      res.send({ price: room.price });
     } else {
-        res.status(404).send({ error: 'Room not found' });
+      res.status(404).send({ error: 'Room not found' });
     }
-  } catch(err) {
-      console.error(err);
-      res.status(500).send({ error: 'Database error' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ error: 'Database error' });
   }
 });
 
@@ -351,60 +380,76 @@ app.post('/api/checkout-customers', async (req, res) => {
 
     console.log('Checkout request body:', req.body);
 
-    await Room.updateOne({ roomnumber: room_number }, { roomcondition: "Dirty" });
+    await Room.updateOne(
+      { roomnumber: room_number },
+      { roomcondition: 'Dirty' }
+    );
 
     if (identity_key) {
-        await Driver.updateOne({ cumid: identity_key }, { cumid: null, availability: "Available" });
+      await Driver.updateOne(
+        { cumid: identity_key },
+        { cumid: null, availability: 'Available' }
+      );
     }
 
     if (customer) {
-        await Customer.deleteOne({ identityNumber: customer });
+      await Customer.deleteOne({ identityNumber: customer });
     }
 
     res.send({ message: 'Checkout successful' });
-  } catch(err) {
-      console.error(err);
-      res.status(500).send('Checkout failed');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Checkout failed');
   }
 });
 
 /* ---------------------- PICKUP ROUTES ---------------------- */
 app.post('/api/assign-driver', async (req, res) => {
-    try {
-        const { driverName, cumid } = req.body;
-        await Driver.updateOne({ name: driverName }, { availability: 'Occupied', cumid: cumid });
-        res.json({ message: 'Driver assigned successfully' });
-    } catch(err) {
-        console.error(err);
-        res.status(500).json({ error: 'Failed to assign driver' });
-    }
+  try {
+    const { driverName, cumid } = req.body;
+    await Driver.updateOne(
+      { name: driverName },
+      { availability: 'Occupied', cumid: cumid }
+    );
+    res.json({ message: 'Driver assigned successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to assign driver' });
+  }
 });
 
 app.get('/api/pickup-drivers', async (req, res) => {
-    try {
-        const drivers = await Driver.find({ availability: 'Available' }, 'name carmodel carnumber');
-        res.json(drivers.map(d => ({
-            name: d.name,
-            carmodel: d.carmodel,
-            carnumber: d.carnumber
-        })));
-    } catch(err) {
-        console.error(err);
-        res.status(500).json({ error: 'Database error' });
-    }
+  try {
+    const drivers = await Driver.find(
+      { availability: 'Available' },
+      'name carmodel carnumber'
+    );
+    res.json(
+      drivers.map((d) => ({
+        name: d.name,
+        carmodel: d.carmodel,
+        carnumber: d.carnumber,
+      }))
+    );
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Database error' });
+  }
 });
 
 app.get('/api/pickup-customers', async (req, res) => {
-    try {
-        const customers = await Customer.find({}, 'identityNumber name');
-        res.json(customers.map(c => ({
-            identityNumber: c.identityNumber,
-            name: c.name
-        })));
-    } catch(err) {
-        console.error(err);
-        res.status(500).json({ error: 'Database error' });
-    }
+  try {
+    const customers = await Customer.find({}, 'identityNumber name');
+    res.json(
+      customers.map((c) => ({
+        identityNumber: c.identityNumber,
+        name: c.name,
+      }))
+    );
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Database error' });
+  }
 });
 
 /* ---------------------- room cleaning ROUTES ---------------------- */
@@ -414,16 +459,18 @@ app.get('/dirty-room', async (req, res) => {
       { roomcondition: 'Dirty', availability: 'Occupied' },
       'roomnumber bedtype price roomcondition availability'
     );
-    res.json(rooms.map(r => ({
+    res.json(
+      rooms.map((r) => ({
         roomnumber: r.roomnumber,
         bedtype: r.bedtype,
         price: r.price,
         roomcondition: r.roomcondition,
-        availability: r.availability
-    })));
-  } catch(err) {
-      console.error('Error fetching dirty rooms:', err);
-      res.status(500).send('Database error');
+        availability: r.availability,
+      }))
+    );
+  } catch (err) {
+    console.error('Error fetching dirty rooms:', err);
+    res.status(500).send('Database error');
   }
 });
 
@@ -433,8 +480,8 @@ app.post('/room-cleaning', async (req, res) => {
     const { roomNumber, availability, condition } = req.body;
 
     const result = await Room.updateOne(
-        { roomnumber: roomNumber },
-        { availability: availability, roomcondition: condition }
+      { roomnumber: roomNumber },
+      { availability: availability, roomcondition: condition }
     );
 
     if (result.matchedCount === 0) {
@@ -442,9 +489,9 @@ app.post('/room-cleaning', async (req, res) => {
     }
 
     res.json({ message: 'Room updated successfully' });
-  } catch(err) {
-      console.error('Error updating room:', err);
-      res.status(500).send('Database error');
+  } catch (err) {
+    console.error('Error updating room:', err);
+    res.status(500).send('Database error');
   }
 });
 
